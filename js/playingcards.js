@@ -3,6 +3,7 @@ function PlayingCards() {
     this.cards = [];
     this.num = 0;
 
+    return this;
 }
 
 
@@ -29,6 +30,7 @@ PlayingCards.prototype = {
         for (i = 0; i < num; i++) {
             this.cards = this.cards.concat(deck);
         }
+        return this;
         
     },
     
@@ -46,6 +48,7 @@ PlayingCards.prototype = {
             
         }
         this.cards = shuffled;
+        return this
     },
     
     deal: function(num) {
@@ -55,12 +58,7 @@ PlayingCards.prototype = {
                 name: 'RangeError',
                 message: 'Must be larger than 1'
             }
-
         }
-
-
-        
-        
         return this.cards.splice(0, num);
     },
     
