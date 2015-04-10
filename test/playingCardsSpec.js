@@ -51,6 +51,16 @@ describe("playing cards test", function() {
 
     });
 
+    it("should deal multiple cards", function() {
+        var cards = deck.deal(4);
+        var i;
+        for (i = 0, len = cards.length; i < len; i++) {
+            expect(deck.cards).not.toContain(cards[i]);
+        }
+        expect(cards.length).toEqual(4);
+
+    });
+
     it("should return number of cards in deck", function() {
         expect(deck.count()).toBe(52);
 

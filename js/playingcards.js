@@ -44,8 +44,10 @@ PlayingCards.prototype = {
         this.cards = shuffled;
     },
     
-    deal: function() {
-        return this.cards.pop();
+    deal: function(num) {
+        num = num || 1;
+        
+        return this.cards.splice(0, num);
     },
     
     count: function() {
