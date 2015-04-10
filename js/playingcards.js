@@ -1,11 +1,15 @@
 function PlayingCards() {
+
     this.cards = [];
     this.num = 0;
+
 }
 
 
 PlayingCards.prototype = {
+
     create: function(num) {
+
         this.num = num;
         
         // reset cards and make new set of decks
@@ -46,6 +50,16 @@ PlayingCards.prototype = {
     
     deal: function(num) {
         num = num || 1;
+        if (num < 1 || isNaN(num)) {
+            throw {
+                name: 'RangeError',
+                message: 'Must be larger than 1'
+            }
+
+        }
+
+
+        
         
         return this.cards.splice(0, num);
     },

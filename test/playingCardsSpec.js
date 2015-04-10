@@ -61,6 +61,10 @@ describe("playing cards test", function() {
 
     });
 
+    it("should throw errors for negative number of cards", function() {
+        expect(deck.deal(-4)).toThrowError("RangeError");
+    });
+
     it("should return number of cards in deck", function() {
         expect(deck.count()).toBe(52);
 
