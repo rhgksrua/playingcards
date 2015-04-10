@@ -1,5 +1,3 @@
-// Jasmine
-
 describe("playing cards test", function() {
 
     describe("using a deck with single set of playing cards", function() {
@@ -60,17 +58,8 @@ describe("playing cards test", function() {
                 expect(deck.cards).not.toContain(cards[i]);
             }
             expect(cards.length).toEqual(4);
-
-<<<<<<< HEAD
-    it("should throw errors for negative number of cards", function() {
-        var throwFunc = function() {
-            deck.deal(-5);
-        };
-        expect(throwFunc).toThrow();
-    });
-=======
         });
->>>>>>> chaining
+
 
         it("should throw errors for dealing negative number of cards", function() {
             var fn = function() {
@@ -105,7 +94,16 @@ describe("playing cards test", function() {
             newDeck.shuffle();
 
             expect(deck.create().shuffle().cards).toEqual(newDeck.cards);
+           
+        });
+
+        it("should return a 3 set of playing cards, shuffled", function() {
+            spyOn(Math, 'random').and.returnValue(0);
+            newDeck.create(3).shuffle();
+            
+            expect(deck.create(3).shuffle().cards).toEqual(newDeck.cards);
+            expect(deck.create(3).shuffle().count()).toEqual(3 * 52);
+
         });
     });
-    
 });
