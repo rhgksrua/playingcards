@@ -1,0 +1,22 @@
+{
+  "name": "playingcards",
+  "version": "0.0.1",
+  "authors": [
+    "Han Koh <rhgksrua@gmail.com>"
+  ],
+  "description": "create a deck of playing cards",
+  "keywords": [
+    "playing",
+    "cards",
+    "deck"
+  ],
+  "license": "MIT",
+  "homepage": "https://github.com/rhgksrua/playingcards",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
