@@ -51,15 +51,8 @@ PlayingCards.prototype = {
     deal: function(num) {
         num = num || 1;
         if (num < 1 || isNaN(num)) {
-            throw {
-                name: 'RangeError',
-                message: 'Must be larger than 1'
-            }
-
+            throw new Error('Number must be greater than 0');
         }
-
-
-        
         
         return this.cards.splice(0, num);
     },
