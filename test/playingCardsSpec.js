@@ -63,8 +63,11 @@ describe("playing cards test", function() {
 
         });
 
-        it("should throw errors for negative number of cards", function() {
-            expect(deck.deal(-4)).toThrowError("RangeError");
+        it("should throw errors for dealing negative number of cards", function() {
+            var fn = function() {
+                deck.deal(-4);
+            };
+            expect(fn).toThrow();
         });
 
         it("should return number of cards in deck", function() {
@@ -85,11 +88,14 @@ describe("playing cards test", function() {
 
 
         it("should return a single card using method chaining", function() {
-            
             expect(deck.create().deal()).toEqual(newDeck.deal());
+        });
 
+        it("should return a shuffled deck", function() {
+            spyOn(Math, 'random').and.returnValue(0);
+            newDeck.shuffle();
 
-
+            expect(deck.create().shuffle().cards).toEqual(newDeck.cards);
         });
     });
     

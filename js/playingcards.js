@@ -55,9 +55,9 @@ PlayingCards.prototype = {
         num = num || 1;
         if (num < 1 || isNaN(num)) {
             throw {
-                name: 'RangeError',
+                name: 'range',
                 message: 'Must be larger than 1'
-            }
+            };
         }
         return this.cards.splice(0, num);
     },
