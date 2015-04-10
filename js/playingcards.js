@@ -3,6 +3,7 @@ function PlayingCards() {
     this.cards = [];
     this.num = 0;
 
+    return this;
 }
 
 
@@ -29,6 +30,7 @@ PlayingCards.prototype = {
         for (i = 0; i < num; i++) {
             this.cards = this.cards.concat(deck);
         }
+        return this;
         
     },
     
@@ -46,6 +48,7 @@ PlayingCards.prototype = {
             
         }
         this.cards = shuffled;
+        return this
     },
     
     deal: function(num) {
@@ -53,7 +56,6 @@ PlayingCards.prototype = {
         if (num < 1 || isNaN(num)) {
             throw new Error('Number must be greater than 0');
         }
-        
         return this.cards.splice(0, num);
     },
     
