@@ -1,12 +1,19 @@
 function PlayingCards() {
 
+    // this.cards[0] is the top
+
     this.cards = [];
     this.num = 0;
     return this;
 }
 
-
 PlayingCards.prototype = {
+
+    init: function(num) {
+        
+        this.create(num || 1).shuffle();
+        return this;
+    },
 
     create: function(num) {
 
@@ -51,6 +58,9 @@ PlayingCards.prototype = {
     },
     
     deal: function(num) {
+
+        // Draws from top of the card
+
         num = num || 1;
         if (num < 1 || isNaN(num)) {
             throw new Error('Number must be greater than 0');
@@ -60,6 +70,27 @@ PlayingCards.prototype = {
     
     count: function() {
         return this.cards.length;
+    },
+
+    addCards: function(cards, position) {
+        // true top
+        // false bottom
+        // undefined random
+        var index;
+
+        var self = this;
+        
+        cards.forEach(function(card) {
+            if (position === undefined) {
+                index = Math.floor(Math.random() * self.cards.length);
+            } else if (position) {
+                index = 0;
+            } else {
+                index = self.cards.length;
+            }
+            self.cards = self.cards.slice(0, index).concat(card, self.cards.slice(index));
+        })
+        return this;
     }
 };
 

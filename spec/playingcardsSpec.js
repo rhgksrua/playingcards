@@ -86,7 +86,9 @@ describe("playing cards test", function() {
 
 
         it("should return a single card using method chaining", function() {
-            expect(deck.create().deal()).toEqual(newDeck.deal());
+            var dealtCards = deck.create().deal();
+            expect(dealtCards).toEqual(newDeck.deal());
+            expect(dealtCards.length).toBe(1);
         });
 
         it("should return a shuffled deck", function() {
@@ -106,4 +108,55 @@ describe("playing cards test", function() {
 
         });
     });
+    describe("Adding cards to a deck", function() {
+        // Create a deck before each test
+        beforeEach(function() {
+            deck = new PlayingCards();
+
+            // Math.random() returns 0
+            spyOn(Math, 'random').and.returnValue(0);
+
+            deck.create();
+        });
+
+        it("should add a single card to a deck", function() {
+            expect(deck.addCards(["2C"]).cards.length).toBe(53);
+            expect(deck.cards[0]).toBe("2C");
+        });
+        it("should add multiple cards to a deck randomly", function() {
+            expect(deck.addCards(["2C", "3D", "4S"]).cards.length).toBe(55);
+            expect(deck.cards.slice(0, 3)).toContain("4S");
+            expect(deck.cards.slice(0, 3)).toContain("3D");
+            expect(deck.cards.slice(0, 3)).toContain("2C");
+            expect(deck.cards[0]).toBe("4S");
+            expect(deck.cards[1]).toBe("3D");
+            expect(deck.cards[2]).toBe("2C");
+        });
+        it("should add a card(s) to top of the deck", function() {
+            deck.addCards(["2C"], true);
+            expect(deck.cards[0]).toBe("2C");
+            expect(deck.cards.length).toBe(53);
+
+            deck.addCards(["2C", "3C", "4D"], true);
+            expect(deck.cards[0]).toBe("4D");
+            expect(deck.cards[1]).toBe("3C");
+            expect(deck.cards[2]).toBe("2C");
+            expect(deck.cards.length).toBe(56);
+        });
+
+        it("should add a card(s) to bottom of the deck", function() {
+            deck.addCards(["2C"], false);
+            expect(deck.cards[deck.cards.length - 1]).toBe("2C");
+            expect(deck.cards.length).toBe(53);
+
+            deck.addCards(["2C", "3C", "4D"], false);
+            expect(deck.cards[deck.cards.length - 1]).toBe("4D");
+            expect(deck.cards[deck.cards.length - 2]).toBe("3C");
+            expect(deck.cards[deck.cards.length - 3]).toBe("2C");
+            expect(deck.cards.length).toBe(56);
+
+        });
+
+    });
+
 });
