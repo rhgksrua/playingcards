@@ -8,6 +8,33 @@
         return this;
     }
 
+    function Card(rank, suit) {
+        this.rank = rank;
+        this.suit = suit;
+        this.value = this.rankToValue(rank);
+    }
+
+    Card.prototype = {
+        rankToValue: function (rank) {
+            var val;
+            switch(rank) {
+                case 'A':
+                    val = 11;
+                    break;
+                case 'K':
+                case 'Q':
+                case 'J':
+                    val = 10;
+                    break;
+                default:
+                    val = +rank;
+            }
+            return val;
+        }
+
+
+    }
+
     PlayingCards.prototype = {
 
         init: function(num) {
@@ -16,7 +43,7 @@
             return this;
         },
 
-        create: function(num) {
+        create: function(num, option) {
 
             this.num = num;
             
@@ -29,7 +56,19 @@
             // deck hold a single complete set
             ranks.forEach(function(rank) {
                 suits.forEach(function(suit) {
-                    deck.push(rank + suit);
+                    switch (option) {
+                        case 1:
+                            deck.push([rank, suit]);
+                            break;
+                        case 2:
+                            deck.push({rank: suit});
+                            break;
+                        case 3:
+                            deck.push(new Card(rank, suit));
+                            break;
+                        default:
+                            deck.push(rank + suit);
+                    }
                 });
             });
             

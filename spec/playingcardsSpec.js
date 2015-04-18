@@ -26,6 +26,7 @@ describe("playing cards test", function() {
         });
 
 
+
         it("should shuffle the cards", function() {
 
             // random returns 0.  Shuffled cards are not actually shuffled.
@@ -70,6 +71,32 @@ describe("playing cards test", function() {
 
         it("should return number of cards in deck", function() {
             expect(deck.count()).toBe(52);
+        });
+    });
+
+
+    describe("create a deck with option 1: array in array", function () {
+        var deck = null;
+
+        // Create a deck before each test
+        beforeEach(function() {
+
+            // New instance of deck before each test.
+            deck = new PlayingCards();
+
+            // Watch create
+            spyOn(deck, 'create').and.callThrough();
+
+            deck.create(1, 1);
+        });
+
+        it("should create a deck with option 1, array in array", function() {
+            expect(deck.cards.length).toBe(52);
+        });
+
+        it("should contain cards as arrays", function() {
+            expect(Object.prototype.toString.call(deck.cards[0])).toBe('[object Array]');
+
         });
     });
 

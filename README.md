@@ -26,7 +26,20 @@ You can create a deck of 3 sets of playing cards and shuffle it by:
 
 #### create a deck
 
-    deck.create([number of decks]);
+    deck.create([number of decks, options]);
+
+    option = 1
+
+creates a deck where cards are [["3", "S"], ["6", "C"] .... ]
+
+    option = 3
+
+creates a deck where cards are new Cards
+
+    Card.rank
+    Card.suit
+    Card.value
+
 
 #### Shuffle
 
