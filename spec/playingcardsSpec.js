@@ -74,6 +74,30 @@ describe("playing cards test", function() {
         });
     });
 
+    describe("create a deck with a Card object", function () {
+        var deck = null;
+        var card = null;
+        beforeEach(function() {
+
+            // New instance of deck before each test.
+            deck = new PlayingCards();
+
+            // Watch create
+            spyOn(deck, 'create').and.callThrough();
+
+            deck.create(1, 3);
+        });
+
+        it("should create a deck with option 3, array of Card instance", function() {
+            expect(deck.cards.length).toBe(52);
+        });
+
+        it("should deal a card that is a instance of Card", function () {
+            expect(deck.deal()[0]).toEqual(jasmine.any(Card));
+        });
+
+
+    });
 
     describe("create a deck with option 1: array in array", function () {
         var deck = null;

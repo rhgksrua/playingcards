@@ -136,4 +136,5 @@
 
     // Add to global
     window.PlayingCards = PlayingCards;
+    window.Card = Card;
 })(document, window);
