@@ -1,4 +1,8 @@
 (function (document, window) {
+    /**
+     * Represents a deck of cards.
+     * @constructor
+     */
     function PlayingCards() {
 
         // this.cards[0] is the top
@@ -8,6 +12,13 @@
         return this;
     }
 
+    /**
+     * Represents a card.
+     * @constructor
+     * @param {string} rank
+     * @param {string} suit
+     */
+
     function Card(rank, suit) {
         this.rank = rank;
         this.suit = suit;
@@ -15,6 +26,11 @@
     }
 
     Card.prototype = {
+
+        /**
+         * Convert card rank to a numerical value
+         * @param {string} rank
+         */
         rankToValue: function (rank) {
             var val;
             switch(rank) {
@@ -37,12 +53,20 @@
 
     PlayingCards.prototype = {
 
+        /**
+         * Creates and shuffles
+         * @param {number} num
+         */
         init: function(num) {
-            
             this.create(num || 1).shuffle();
             return this;
         },
 
+        /**
+         * Creates an ordered deck
+         * @param {number} num
+         * @option {number} option
+         */
         create: function(num, option) {
 
             this.num = num;
@@ -77,9 +101,11 @@
                 this.cards = this.cards.concat(deck);
             }
             return this;
-            
         },
         
+        /**
+         * Shuffles card
+         */
         shuffle: function() {
             
             var shuffled = [];
@@ -97,6 +123,10 @@
             return this
         },
         
+        /**
+         * Deals card
+         * @param {number} num
+         */
         deal: function(num) {
 
             // Draws from top of the card
@@ -105,13 +135,25 @@
             if (num < 1 || isNaN(num)) {
                 throw new Error('Number must be greater than 0');
             }
+            // No more cards in the deck
+            if (this.count() < 1) {
+                return false;
+            }
             return this.cards.splice(0, num);
         },
         
+        /**
+         * Returns number of cards remaining in the dec
+         */
         count: function() {
             return this.cards.length;
         },
 
+        /**
+         * Add cards to deck on top/bottom/random.
+         * @param {string} cards
+         * @param {boolean} position
+         */
         addCards: function(cards, position) {
             // true top
             // false bottom
@@ -137,4 +179,5 @@
     // Add to global
     window.PlayingCards = PlayingCards;
     window.Card = Card;
+
 })(document, window);
